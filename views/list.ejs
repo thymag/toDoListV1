@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Lista de Tarefas</title>
+  </head>
+  <body>
+    <h1> <%= diaHoje%> </h1>
+
+    <ul>
+
+  <% for (var i=0;i<novaLista.length;i++){ %>
+    <li> <%= novaLista[i] %> </li>
+  <% } %>
+    </ul>
+
+    <form class="" action="/" method="post">
+      <input type="text" name="novoItem" value="">
+      <button type="submit" name="submit">Adicionar</button>
+    </form>
+
+  </body>
+</html>
