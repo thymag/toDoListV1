@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const date = require(__dirname + "/date.js");
 
 const app = express();
 
@@ -13,15 +14,7 @@ app.set("view engine", "ejs");
 
 app.get("/", function(req, res) {
 
-  let hoje = new Date();
-
-  let opcoes = {
-    weekday: "long",
-    day: "numeric",
-    month: "long"
-  }
-
-  let dia = hoje.toLocaleDateString("en-us", opcoes);
+  const dia = date.getDay();
 
   res.render("list", {
     pageTitle: dia,
@@ -32,7 +25,6 @@ app.get("/", function(req, res) {
 
 app.post("/", function(req, res){
   let item = req.body.novoItem;
-
 
   if(req.body.list === "Work"){
     workItems.push(item);
