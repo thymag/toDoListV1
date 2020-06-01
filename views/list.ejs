@@ -1,23 +1,22 @@
-<!DOCTYPE html>
-<html lang="pt-br" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Lista de Tarefas</title>
-  </head>
-  <body>
-    <h1> <%= diaHoje%> </h1>
+<%- include("heading") -%>
 
-    <ul>
+  <div class="box" id="heading">
+    <h1> <%= pageTitle%> </h1>
+  </div>
 
-  <% for (var i=0;i<novaLista.length;i++){ %>
-    <li> <%= novaLista[i] %> </li>
-  <% } %>
-    </ul>
+  <div class="box">
+    <% for (var i=0;i<novaLista.length;i++){ %>
+    <div class="item">
+      <input type="checkbox">
+      <p> <%= novaLista[i] %> </p>
+    </div>
 
-    <form class="" action="/" method="post">
-      <input type="text" name="novoItem" value="">
-      <button type="submit" name="submit">Adicionar</button>
+    <% } %>
+    <form class="item" action="/" method="post">
+      <input type="text" name="novoItem" placeholder="Novo Item" autocomplete="off">
+      <button type="submit" name="list" value=<%= pageTitle %>>+</button>
     </form>
+  </div>
 
-  </body>
-</html>
+
+<%- include("footer") -%>

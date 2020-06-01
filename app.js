@@ -1,39 +1,57 @@
-var express = require("express");
-var bodyParser = require("body-parser");
+const express = require("express");
+const bodyParser = require("body-parser");
 
-var app = express();
+const app = express();
 
-var items = [];
+let items = ["Estudar", "Estudar como Estudar", "Study"];
+let workItems = [];
 
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.static('public'));
 
 app.set("view engine", "ejs");
 
 app.get("/", function(req, res) {
 
-  var hoje = new Date();
+  let hoje = new Date();
 
-  var opcoes = {
+  let opcoes = {
     weekday: "long",
     day: "numeric",
     month: "long"
   }
-  var dia = hoje.toLocaleDateString("en-us", opcoes);
 
+  let dia = hoje.toLocaleDateString("en-us", opcoes);
 
   res.render("list", {
-    diaHoje: dia,
+    pageTitle: dia,
     novaLista:items
   });
 
 });
 
 app.post("/", function(req, res){
-  var item = req.body.novoItem;
-  items.push(item);
+  let item = req.body.novoItem;
 
-  res.redirect("/");
+
+  if(req.body.list === "Work"){
+    workItems.push(item);
+    res.redirect("/work");
+  }else{
+    items.push(item);
+    res.redirect("/");
+  }
+
+
 });
+
+app.get("/work", function(req, res){
+
+  res.render("list", {
+    pageTitle:"Work List",
+    novaLista: workItems
+  })
+})
 
 app.listen(3000, function() {
   console.log("Server Iniciou na Porta 3000");
